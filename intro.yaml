@@ -1,0 +1,28 @@
+#YAML Intro
+# <key>: <value>
+team: csk #string
+city: "chennai"
+year: 2008 #numeric
+is_current_champ: true #false, 0, 1, yes , no #boolean
+src: /etc/hosts
+dest: /tmp/hosts
+port: 8090
+
+#list
+servers_list: ["server1","server2","s3"]
+servers_list:
+  - server1
+  - server2
+  - s3
+
+#dictionary
+servers_data:
+  - name: webserver
+    ip: 10.0.15.72
+    role: apache
+  - name: dbserver
+    ip: 10.0.15.73
+    role: mysql
+  - name: mailserver
+    ip: 1.2.3.4
+    role: smtp

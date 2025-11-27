@@ -1,0 +1,25 @@
+#try consume variables overtime dont touch this file
+- name: "deploy {{ app }}"
+  hosts: "{{group}}"
+  # vars:
+  #   app: httpd
+  #   appservice: httpd
+  #   appport: 80/tcp
+  vars_files: app-deploy
+  tasks:
+    - name: "install {{ app }} in {{group}} nodes" 
+      dnf:
+        name: "{{app}}"
+        state: latest
+    - name: "start {{appservice}} service"
+      service:
+        name: "{{appservice}}"
+        state: started
+        enabled: true
+    - name: "open port for {{app}} of port no {{appport}}"
+      ansible.posix.firewalld:
+        #service: mysql
+        port: "{{appport}}"
+        state: enabled
+        immediate: yes
+        permanent: 1

@@ -1,0 +1,34 @@
+# Maria db Install 
+- name: Maria db installation in the db servers
+  hosts: db
+  tasks: 
+    - name: install maria db 
+      tags:
+        - install 
+        - db
+      dnf: 
+        name: mariadb-server
+        state: latest
+    # - name: create/copy db page
+    #   #ignore_errors: false
+    #   copy:
+    #     #src: homepage.html #create hp in master node
+    #     content: "This maria db created using ansible PB task"
+    #     dest: /var/www/html/index.html
+    - name: start service and enable
+      tags:
+        - configure
+        - db
+      ansible.builtin.service:
+        name: mariadb.service
+        state: started
+        enabled: true
+    - name: open firewall port 3306
+      ansible.posix.firewalld:
+        service: mysql
+        #port: 3306/tcp
+        state: enabled
+        immediate: yes
+        permanent: 1 
+  
+  

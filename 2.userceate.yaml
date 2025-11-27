@@ -1,0 +1,9 @@
+# Create use Sales1
+- name: Create user Sales1
+  hosts: all 
+  tasks:
+    - name: Add user Sales1
+      ansible.builtin.user: 
+        name: sales1
+        state: present
+          

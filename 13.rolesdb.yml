@@ -1,0 +1,8 @@
+- name: deploy mariadb using role 
+  hosts: db
+  roles: 
+    - role: db
+  vars: 
+    pkg: mariadb-server
+    #appservice: mariadb
+    fport: 3306

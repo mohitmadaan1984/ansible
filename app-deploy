@@ -1,0 +1,5 @@
+app: dialog
+appservice: httpd
+appport: 80/tcp
+group: web
+

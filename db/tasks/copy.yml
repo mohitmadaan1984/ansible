@@ -1,0 +1,7 @@
+- name: copy as per need  
+  copy:
+    #src: homepage.html #create hp in master node
+    content: "This web page created using ansible PB task"
+    dest: /tmp/test.html
+- name: generate report
+  shell: uptime > /tmp/uptime.txt

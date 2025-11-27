@@ -1,0 +1,20 @@
+---
+- name: deploy dovecot app in systems with more than 4GB
+  hosts: web
+  tasks:
+    - name: install dovecot
+      package: 
+        name: dovecot
+        state: latest
+      when: ansible_memtotal_mb >= 4096
+    - name: install apache in redhat family OSes
+      dnf:
+        name: httpd
+        state: latest
+      when: ansible_os_family == "Redhat"
+    - name: install nginx in debian family OSes
+      apt:
+        name: nginx
+        state: latest
+      when: ansible_os_family == "debian"
+...

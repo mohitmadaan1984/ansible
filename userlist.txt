@@ -1,0 +1,9 @@
+vusers:
+  - uname: sales42
+    upass: redhat
+  - uname: salesmanager40
+    upass: Redhat@123
+  - uname: sales41
+    upass: P@ssw0rd
+
+    

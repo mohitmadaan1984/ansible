@@ -1,0 +1,9 @@
+# Create Disk report 
+- name: Create disk report and copy to tmp folder in all nodes 
+  hosts: all
+  tasks: 
+    - name: create disk report file using shell module 
+      ansible.builtin.shell: "df -h > /tmp/diskreport.txt"
+    - name: get the content of disk report 
+      ansible.builtin.command: "cat /tmp/diskreport.txt"
+    

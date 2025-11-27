@@ -1,0 +1,7 @@
+- name: use include or import tasks
+  hosts: all
+  tasks:
+    - name: import tasks of firewallportopen
+      import_tasks: tasks/firewallport.yml
+      vars:
+        fport: 8080 

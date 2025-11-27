@@ -1,0 +1,6 @@
+- name: install httpd app
+  tags:
+    - install
+  dnf:
+    name: "{{ pkg }}"
+    state: latest

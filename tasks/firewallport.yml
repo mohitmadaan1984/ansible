@@ -1,0 +1,6 @@
+- name: open firewallport "{{fport}}"
+  ansible.posix.firewalld:
+    port: "{{fport}}/tcp"
+    state: enabled
+    immediate: yes
+    permanent: 1 

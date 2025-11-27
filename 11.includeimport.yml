@@ -1,0 +1,15 @@
+- name: use include or import tasks
+  hosts: web
+  tasks:
+    - name: get system ip 
+      shell: hostname -i
+    - name: include task on install
+      include_tasks: tasks/install.yml
+      vars: 
+        pkg: httpd
+    - name: import tasks of copy.yml 1000tasks
+      import_tasks: tasks/copy.yml
+    - name: inclued task service
+      include_tasks: tasks/service.yml
+      vars:
+        appservice: httpd 
