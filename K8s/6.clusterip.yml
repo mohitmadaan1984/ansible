@@ -1,0 +1,55 @@
+apiVersion: apps/v1 #version of the API to use
+kind: Deployment #What kind of object we're deploying
+metadata: #information about our object we're deploying
+  name: nginx-deployment #Name of the deployment
+  labels: #A tag on the deployments created
+    app: nginx
+spec: #specifications for our object
+  replicas: 4 #The number of pods that should always be running
+  selector: #which pods the replica set should be responsible for
+    matchLabels:
+      app: nginxapp #any pods with ALL labels matching this I'm responsible for.
+  template: #The pod template that gets deployed
+    metadata:
+      labels: #A tag on the replica sets created
+        app: nginxapp
+    spec:
+      containers:
+      - name: nginx-container #the name of the container within the pod
+        image: nginxdemos/hello:plain-text #which container image should be pulled
+        #image: nginxdemos/hello:plain-text #which container image should be pulled
+        ports:
+        - containerPort: 80 #the port of the container within the pod
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: cluster-ip
+spec:
+  selector:
+    app: nginxapp
+  ports:
+  - port: 8090 # reach the pod service
+    targetPort: 80 #container port app service provided
+
+
+    #kubectl.exe apply -f .\6.1clusteripservice.yml
+    # kubectl.exe get deploy
+    # kubectl.exe get svc
+    # curl http://localhost:8090
+    # kubectl exec -it nginx-deployment-56f9df4dd9-6x4hs -- sh
+      #curl http://10.96.31.188:8090
+      #curl http://myservice:8090
+      #exit
+    #kubectl port-forward svc/myservice 8090:8090 # will always forward to only one container pod
+    #curl http://localhost:8090 
+    
+       #kubectl get serviceendpoints myservice
+    #kubectl describe svc myservice
+    #kubectl.exe delete -f .\clusteripservice.yml 
+    
+#without service we can use expose command
+# kubectl expose deploy nginx-deployment --type=ClusterIP --name=ingress-nginx --port=8010 --target-port=80 --protocol=TCP
+
+

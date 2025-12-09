@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: hostpathpod
+spec:
+  containers:
+  - image: nginxdemos/hello:plain-text
+    name: test-container
+    volumeMounts:
+      - mountPath: "/usr/share/nginx/html"
+        name: test-hostpath
+  volumes:
+  - name: test-hostpath
+    hostPath:
+      path: /testdata
+      type: DirectoryOrCreate #if dir not available create new
+    
+  
+      
+
