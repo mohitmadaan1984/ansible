@@ -1065,9 +1065,9 @@ after inital setup - install docker plugins
 
 https://www.jenkins.io/doc/book/installing/linux/#red-hat-centos
 
-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
 
-dckr_pat_LYGud5W97ldJMoLclY8FXYH8SOQ
+
+
 
 
 
