@@ -1,0 +1,59 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name:  exkube
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: echo-exkube
+  namespace: exkube
+spec: 
+  replicas: 3 
+  selector: 
+    matchLabels: 
+      app: echo-studentX
+  template:
+    metadata: 
+       labels:
+        app: echo-studentX
+    spec:
+      containers:   
+      - name: echo-exkube-cont
+        image: httpd
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: echo-exkube
+  namespace: exkube
+spec: 
+  replicas: 3 
+  selector: 
+    matchLabels: 
+      app: echo-studentX
+  template:
+    metadata: 
+       labels:
+        app: echo-studentX
+    spec:
+      containers:   
+      - name: echo-exkube-cont
+        image: httpd
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: echo-service
+  namespace: exkube
+spec:
+  type: ClusterIP
+  selector:
+    app: echo-studentX
+  ports:
+  - port: 80
+    targetPort: 31202
+  
+
+
+

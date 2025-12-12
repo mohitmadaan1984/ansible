@@ -1,0 +1,8 @@
+deploy: 
+  projname: proj2
+  ns: proj2
+  replicas: 4
+service:
+  sname: app-proj2
+  ns: proj2
+  port: 6666

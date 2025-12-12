@@ -1,0 +1,8 @@
+deploy: 
+  projname: proj1
+  ns: proj1
+  replicas: 4
+service:
+  sname: app-proj1
+  ns: proj1
+  port: 8888

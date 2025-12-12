@@ -1,0 +1,8 @@
+deploy: 
+  projname: test
+  ns: default
+  replicas: 2
+service:
+  sname: appcluster
+  ns: default
+  port: 9999

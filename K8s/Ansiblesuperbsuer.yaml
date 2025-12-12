@@ -1,0 +1,37 @@
+---
+- name: Create a new superuser with sudo privileges
+  hosts: all
+  become: true  
+
+  vars:
+    new_username: "admin"
+    hashed_password: "admin" 
+
+  tasks:
+    - name: Create the new user account
+      ansible.builtin.user:
+        name: "{{ new_username }}"
+        password: "{{ hashed_password }}"
+        state: present
+        shell: /bin/bash
+        createhome: true
+        comment: "Ansible Admin User"
+      register: user_creation_result
+      
+    - name: Determine the appropriate sudo group (wheel or sudo)
+      ansible.builtin.set_fact:
+        sudo_group: "{{ 'wheel' if ansible_os_family == 'RedHat' else 'sudo' }}"
+      
+    - name: Add the new user to the sudo/wheel group
+      ansible.builtin.user:
+        name: "{{ new_username }}"
+        groups: "{{ sudo_group }}"
+        append: true  
+      
+    - name: Ensure passwordless sudo access for the user (optional but recommended for automation)
+      ansible.builtin.lineinfile:
+        path: /etc/sudoers.d/{{ new_username }}
+        create: true
+        mode: '0440' 
+        line: "{{ new_username }} ALL=(ALL) NOPASSWD:ALL"
+        validate: 'visudo -cf %s'
